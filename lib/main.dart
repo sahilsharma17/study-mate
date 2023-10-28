@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
 import 'package:study_buddy/screens/home_screen.dart';
@@ -20,7 +21,7 @@ Future<void> main() async {
   );
   runApp(ChangeNotifierProvider<TimerService>(
     create:(_)=>TimerService(),
-    child:MyApp(),
+    child:const MyApp(),
   ));
 }
 
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
-      child:  MaterialApp(
+      child:  GetMaterialApp(
         debugShowCheckedModeBanner: false,
         home:  WelcomeScreen(),
         title: "Study Buddy",
