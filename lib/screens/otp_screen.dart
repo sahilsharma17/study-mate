@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'dart:developer' as devTools;
 
 import 'package:provider/provider.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
+import 'package:study_buddy/screens/home.dart';
 import 'package:study_buddy/utilities/snack_bar.dart';
 import 'package:study_buddy/widgets/custum_button.dart';
 
@@ -188,8 +190,9 @@ class _OtpScreenState extends State<OtpScreen> {
           userOtp: userOtp,
           verificationId: verificationId,
           onSuccess: () {
-            Navigator.pushNamedAndRemoveUntil(
-                context, 'home_screen', (route) => false);
+            // Navigator.pushNamedAndRemoveUntil(
+            //     context, 'home_screen', (route) => false);
+            Get.to(Home());
           });
     } on FirebaseAuthException catch (e) {
       snackBar(context, e.message.toString(), 'red');

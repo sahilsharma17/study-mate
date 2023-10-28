@@ -10,13 +10,18 @@ import 'dart:developer' as devTools;
 
 
 import 'firebase_options.dart';
+import 'screens/home.dart';
+import 'screens/pomodoro_screen/timer_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider<TimerService>(
+    create:(_)=>TimerService(),
+    child:MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -30,8 +35,8 @@ class MyApp extends StatelessWidget {
       ],
       child:  MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const WelcomeScreen(),
-        title: "Studdy Buddy",
+        home:  WelcomeScreen(),
+        title: "Study Buddy",
         routes: {
           "home_screen":(context) => const HomeScreen(),
           "registration_screen":(context) => const RegistrationScreen(),
