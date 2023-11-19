@@ -17,17 +17,17 @@ class Home extends StatelessWidget {
     var controller = Get.put(HomeController());
 
     var navbarItems = [
-      BottomNavigationBarItem(icon: Icon(Icons.home),label: "home",),
-      BottomNavigationBarItem(icon: Icon(Icons.timer) , label: "Pomodoro"),
-      BottomNavigationBarItem(icon: Icon(Icons.book) , label: "Session"),
-      BottomNavigationBarItem(icon: Icon(Icons.group), label: "Groups"),
-      BottomNavigationBarItem(icon: Icon(Icons.notes) , label: "Notes"),
+      const BottomNavigationBarItem(icon: Icon(Icons.home),label: "home",),
+      const BottomNavigationBarItem(icon: Icon(Icons.timer) , label: "Pomodoro"),
+      const BottomNavigationBarItem(icon: Icon(Icons.book) , label: "Session"),
+      const BottomNavigationBarItem(icon: Icon(Icons.group), label: "Groups"),
+      const BottomNavigationBarItem(icon: Icon(Icons.notes) , label: "Notes"),
     ];
 
     var navBody = [
-      HomeScreen(),
-      PomodoroScreen(),
-      ProfileScreen(),
+      const HomeScreen(),
+      const PomodoroScreen(),
+      const ProfileScreen(),
       GroupChatScreen(),
       NotesScreen(),
     ];

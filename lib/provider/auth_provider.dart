@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:study_buddy/screens/registration_screen.dart';
+import 'package:study_buddy/services/database_service.dart';
 import 'package:study_buddy/utilities/snack_bar.dart';
 import 'dart:developer' as devTools;
 
-class AuthProvider extends ChangeNotifier {
+class MyAuthProvider extends ChangeNotifier {
   bool _isSignedIn = false;
 
   bool _isLoading = false;
@@ -12,15 +15,16 @@ class AuthProvider extends ChangeNotifier {
   bool get isSignedIn => _isSignedIn;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   String? _uid;
-  String get getUserId => _uid!;
+  String? get getUserId => _firebaseAuth.currentUser?.uid;
 
-  AuthProvider() {
+  MyAuthProvider() {
+    devTools.log("MyAuthProvider initiated");
     checkSignedin();
   }
 
   void checkSignedin() async {
-    final SharedPreferences s = await SharedPreferences.getInstance();
-    _isSignedIn = s.getBool("is_signed_in") ?? false;
+    _isSignedIn = (_firebaseAuth.currentUser?.uid != null) ? true : false;
+    devTools.log(_isSignedIn.toString());
     notifyListeners();
   }
 
@@ -75,5 +79,16 @@ class AuthProvider extends ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
+  }
+
+  void logOutUser() async {
+    await _firebaseAuth.signOut();
+    devTools.log("Logged Out");
+    Get.offAll(() => const RegistrationScreen());
+  }
+
+  Future<bool> checkUserDataexists() async {
+    DatabaseService databaseService = DatabaseService(_uid);
+    return await databaseService.checkUserDataExists();
   }
 }

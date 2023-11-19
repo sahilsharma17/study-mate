@@ -1,5 +1,4 @@
 import 'package:country_picker/country_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +30,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   );
   @override
   Widget build(BuildContext context) {
-    bool isLoading = Provider.of<AuthProvider>(context, listen: true).isLoading;
+    bool isLoading = Provider.of<MyAuthProvider>(context, listen: true).isLoading;
     return Scaffold(
       body: SafeArea(
           child: Padding(
@@ -157,7 +156,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
 
   void sendPhoneNumber() {
-    final ap = Provider.of<AuthProvider>(context, listen: false);
+    final ap = Provider.of<MyAuthProvider>(context, listen: false);
     String phoneNumber = phoneController.text.trim();
 
     ap.signInWithPhone(context, "+${country.phoneCode}$phoneNumber");

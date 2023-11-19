@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'dart:developer' as devTools;
-
 import 'package:provider/provider.dart';
+import 'package:study_buddy/helpers/helper_functions.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
 import 'package:study_buddy/screens/home.dart';
+import 'package:study_buddy/screens/profile_screen/profile_screen.dart';
+import 'package:study_buddy/screens/register_profile.dart';
 import 'package:study_buddy/utilities/snack_bar.dart';
 import 'package:study_buddy/widgets/custum_button.dart';
 
@@ -22,7 +24,7 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     final verificationID = ModalRoute.of(context)?.settings.arguments as String;
     final isLoading =
-        Provider.of<AuthProvider>(context, listen: true).isLoading;
+        Provider.of<MyAuthProvider>(context, listen: true).isLoading;
 
     TextEditingController otpController = TextEditingController();
     return Scaffold(
@@ -99,34 +101,6 @@ class _OtpScreenState extends State<OtpScreen> {
                     keyboardType: TextInputType.number,
                     autoDismissKeyboard: true,
                   ),
-                  // TextFormField(
-                  //   onChanged: (value) {
-                  //     String userOtp = otpController.text.trim();
-                  //     if (userOtp.length == 6) {
-                  //       verifyOtp(context, userOtp, verificationID);
-                  //     }
-                  //   },
-                  //   autofocus: true,
-                  //   controller: otpController,
-                  //   maxLength: 6,
-                  //   decoration: InputDecoration(
-                  //     hintText: "Enter the OTP",
-                  //     hintStyle: TextStyle(
-                  //         fontSize: 15,
-                  //         fontWeight: FontWeight.w500,
-                  //         color: Colors.grey.shade500),
-                  //     enabledBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(10),
-                  //         borderSide: const BorderSide(color: Colors.black12)),
-                  //     focusedBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(10),
-                  //         borderSide: const BorderSide(color: Colors.black12)),
-                  //   ),
-                  //   cursorColor: Colors.purple,
-                  //   keyboardType: TextInputType.phone,
-                  //   style: const TextStyle(
-                  //       fontSize: 18, fontWeight: FontWeight.bold),
-                  // ),
                   const SizedBox(
                     height: 25,
                   ),
@@ -183,16 +157,21 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   void verifyOtp(BuildContext context, String userOtp, String verificationId) {
-    final ap = Provider.of<AuthProvider>(context, listen: false);
+    final ap = Provider.of<MyAuthProvider>(context, listen: false);
     try {
       ap.verifyOtp(
           context: context,
           userOtp: userOtp,
           verificationId: verificationId,
-          onSuccess: () {
-            // Navigator.pushNamedAndRemoveUntil(
-            //     context, 'home_screen', (route) => false);
-            Get.to(Home());
+          onSuccess: () async {
+            bool dataExists = await ap.checkUserDataexists();
+            await HelperFunctions.saveLoggedInUserId(ap.getUserId);
+            String? uid = await HelperFunctions.getLoggedInUserId();
+            devTools.log("User ID:");
+            devTools.log(uid ?? "Not saved");
+            dataExists
+                ? Get.offAll(() => const Home())
+                : Get.offAll(() => UserDetailsPage());
           });
     } on FirebaseAuthException catch (e) {
       snackBar(context, e.message.toString(), 'red');

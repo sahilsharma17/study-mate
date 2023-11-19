@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:study_buddy/constants/strings.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
+import 'package:study_buddy/screens/home.dart';
 import 'package:study_buddy/screens/registration_screen.dart';
 import 'package:study_buddy/widgets/custum_button.dart';
+import 'dart:developer' as devTools;
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -13,8 +17,16 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
+  void initState(){
+    super.initState();
+    final ap = Provider.of<MyAuthProvider>(context, listen: false);
+    
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final ap = Provider.of<AuthProvider>(context, listen: false);
+    String? uid = Provider.of<MyAuthProvider>(context, listen: true).getUserId;
+    devTools.log(uid ?? "No user logged in");
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -61,7 +73,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: CustomButton(
                       text: "Get Started",
                       onPressed: () {
-                        Navigator.pushNamed(context, 'registration_screen');
+                        Get.to(()=>const RegistrationScreen());
                       }))
             ],
           ),
