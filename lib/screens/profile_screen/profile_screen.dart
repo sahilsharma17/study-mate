@@ -40,24 +40,49 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 20),
             GestureDetector(
               onTap: () {
-                ap.logOutUser();
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Confirm Logout'),
+                      content: const Text('Are you sure you want to logout?'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            ap.logOutUser(); // Perform logout action
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                          child: const Text('Logout'),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                          offset: const Offset(0, 5),
-                          color: Colors.purple.withOpacity(.2),
-                          spreadRadius: 2,
-                          blurRadius: 10)
-                    ]),
+                  color: Colors.purple.shade400,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(0, 5),
+                      color: Colors.purple.withOpacity(.2),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                    )
+                  ],
+                ),
                 child: ListTile(
-                  title: const Text('Logout', style: TextStyle(color: Colors.red)),
-                  leading: const Icon(CupertinoIcons.power, color: Colors.red),
-                  trailing:
-                      Icon(Icons.arrow_forward, color: Colors.grey.shade400),
+                  title: const Text('Logout',
+                      style: TextStyle(color: Colors.white)),
+                  leading:
+                      const Icon(CupertinoIcons.power, color: Colors.white),
                   tileColor: Colors.white,
                 ),
               ),
@@ -75,7 +100,7 @@ class ProfileScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-                offset:const Offset(0, 5),
+                offset: const Offset(0, 5),
                 color: Colors.purple.withOpacity(.2),
                 spreadRadius: 2,
                 blurRadius: 10)
