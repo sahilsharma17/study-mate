@@ -11,3 +11,4 @@ const Color green = Color.fromRGBO(4, 196, 33, 1);
 const Color blue = Color.fromRGBO(47, 47, 221, 1);
 const Color grey = Colors.grey;
 const Color black = Colors.black;
+const tPrimaryColor =Color(0xFFFFE400);

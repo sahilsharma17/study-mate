@@ -18,7 +18,7 @@ class TimerOptions extends StatelessWidget {
           return InkWell(
             onTap:()=>provider.selectTime(double.parse(time)),
             child: Container(
-              margin: EdgeInsets.only(left: 10),
+              margin:const  EdgeInsets.only(left: 10),
               width: (70),
               height: (50),
               decoration: int.parse(time)==provider.selectedTime? BoxDecoration(

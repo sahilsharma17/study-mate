@@ -47,21 +47,21 @@ class _PomodoroScreenState extends State<PomodoroScreen> {
         alignment: Alignment.center,
         child: Column(
           children: [
-            SizedBox(height: 20),
-            TimerCard(),
-            SizedBox(
+           const SizedBox(height: 20),
+            const TimerCard(),
+          const  SizedBox(
               height: 40,
             ),
             TimerOptions(),
-            SizedBox(
+          const  SizedBox(
               height: 30,
             ),
             // TimeController(),
-            SizedBox(
+          const  SizedBox(
               height: 30,
             ),
-            ProgressWidget(),
-            SizedBox(
+          const  ProgressWidget(),
+          const  SizedBox(
               height: 30,
             ),
             Row(
@@ -69,8 +69,8 @@ class _PomodoroScreenState extends State<PomodoroScreen> {
               children: [
                 IconButton(
                   icon: provider.timerPlaying
-                      ? Icon(Icons.pause)
-                      : Icon(Icons.play_arrow_sharp),
+                      ?const Icon(Icons.pause)
+                      :const Icon(Icons.play_arrow_sharp),
                   color: Colors.black,
                   iconSize: 55,
                   onPressed: () {

@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
 import 'package:study_buddy/screens/home.dart';
 import 'package:study_buddy/screens/welcome_screen.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreenOld extends StatefulWidget {
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashScreenOld> createState() => _SplashScreenOldState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenOldState extends State<SplashScreenOld> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(

@@ -2,17 +2,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
-import 'package:study_buddy/helpers/helper_functions.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
 import 'package:study_buddy/screens/home_screen.dart';
 import 'package:study_buddy/screens/otp_screen.dart';
 import 'package:study_buddy/screens/registration_screen.dart';
-import 'package:study_buddy/screens/splash_screen.dart';
-import 'package:study_buddy/screens/welcome_screen.dart';
+import 'package:study_buddy/screens/splash_screen/splash_screen.dart';
 import 'dart:developer' as devTools;
 
 import 'firebase_options.dart';
-import 'screens/home.dart';
 import 'screens/pomodoro_screen/timer_service.dart';
 import 'package:flutter/foundation.dart';
 
@@ -59,7 +56,9 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        // home: UserDetailsPage(),
+        //  home: RegistrationScreen(),
+          home:  const SplashScreen(),
         title: "Study Buddy",
         routes: {
           "home_screen": (context) => const HomeScreen(),
