@@ -7,6 +7,7 @@ import 'package:study_buddy/screens/home_screen.dart';
 import 'package:study_buddy/screens/otp_screen.dart';
 import 'package:study_buddy/screens/registration_screen.dart';
 import 'package:study_buddy/screens/welcome_screen.dart';
+import 'package:study_buddy/services/authenticate.dart';
 import 'dart:developer' as devTools;
 
 
@@ -32,11 +33,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => MyAuthProvider()),
       ],
       child:  GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home:  WelcomeScreen(),
+        home:  Authenticate(),
         title: "Study Buddy",
         routes: {
           "home_screen":(context) => const HomeScreen(),

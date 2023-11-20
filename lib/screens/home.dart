@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_buddy/screens/notes_screen/notes_screen.dart';
 import 'package:study_buddy/screens/pomodoro_screen/pomodoroScreen.dart';
+import 'package:study_buddy/screens/session_screen/session.dart';
 
 import '../controllers/home_controller.dart';
 import 'groups_screen/group_chat_screen.dart';
@@ -25,9 +26,9 @@ class Home extends StatelessWidget {
     ];
 
     var navBody = [
-      HomeScreen(),
-      PomodoroScreen(),
       ProfileScreen(),
+      PomodoroScreen(),
+      MySessionPage(),
       GroupChatScreen(),
       NotesScreen(),
     ];

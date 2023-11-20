@@ -18,9 +18,9 @@ class _PomodoroScreenState extends State<PomodoroScreen> {
   Widget build(BuildContext context) {
     final provider = Provider.of<TimerService>(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       appBar: AppBar(
-        elevation: 0,
+        elevation: 10,
         backgroundColor: Colors.purple,
         // backgroundColor: renderColor(provider.currentState),
         title: Text(
@@ -28,7 +28,7 @@ class _PomodoroScreenState extends State<PomodoroScreen> {
           // style: textStyle(25.0, Colors.black, FontWeight.w700),
 
           style: textStyle(
-              Size: 25.0, color: Colors.white, fontWeight: FontWeight.w700),
+              Size: 25.0, color: Colors.white, fontWeight: FontWeight.w400),
         ),
         // actions: [
         //   IconButton(

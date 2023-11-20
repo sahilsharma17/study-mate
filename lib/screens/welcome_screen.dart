@@ -14,7 +14,7 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final ap = Provider.of<AuthProvider>(context, listen: false);
+    final ap = Provider.of<MyAuthProvider>(context, listen: false);
     return Scaffold(
       body: SafeArea(
         child: Padding(

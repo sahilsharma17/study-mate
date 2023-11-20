@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:study_buddy/screens/pomodoro_screen/utils.dart';
 
 class GroupChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Group Chat'),
+          title: Text('Group Chat', 
+          style: textStyle(
+              Size: 25.0, color: Colors.white, fontWeight: FontWeight.w400),),
           backgroundColor: Colors.purple, // Set the app bar color to purple.
         ),
         body: GroupListScreen(),

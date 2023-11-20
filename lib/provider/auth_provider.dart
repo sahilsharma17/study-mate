@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_buddy/utilities/snack_bar.dart';
 import 'dart:developer' as devTools;
 
-class AuthProvider extends ChangeNotifier {
+class MyAuthProvider extends ChangeNotifier {
   bool _isSignedIn = false;
 
   bool _isLoading = false;
@@ -14,7 +14,7 @@ class AuthProvider extends ChangeNotifier {
   String? _uid;
   String get getUserId => _uid!;
 
-  AuthProvider() {
+  MyAuthProvider() {
     checkSignedin();
   }
 

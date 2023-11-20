@@ -22,7 +22,7 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     final verificationID = ModalRoute.of(context)?.settings.arguments as String;
     final isLoading =
-        Provider.of<AuthProvider>(context, listen: true).isLoading;
+        Provider.of<MyAuthProvider>(context, listen: true).isLoading;
 
     TextEditingController otpController = TextEditingController();
     return Scaffold(
@@ -183,7 +183,7 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   void verifyOtp(BuildContext context, String userOtp, String verificationId) {
-    final ap = Provider.of<AuthProvider>(context, listen: false);
+    final ap = Provider.of<MyAuthProvider>(context, listen: false);
     try {
       ap.verifyOtp(
           context: context,
