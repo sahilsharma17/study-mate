@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:study_buddy/constants/strings.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
-import 'package:study_buddy/screens/home.dart';
 import 'package:study_buddy/screens/registration_screen.dart';
 import 'package:study_buddy/widgets/custum_button.dart';
 import 'dart:developer' as devTools;
@@ -38,7 +36,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                 height: 300,
                 child: Image.asset(
                   "assets/image1.png",

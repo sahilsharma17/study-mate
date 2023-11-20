@@ -6,7 +6,7 @@ class GroupChatScreen extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Group Chat'),
+          title: const Text('Group Chat'),
           backgroundColor: Colors.purple, // Set the app bar color to purple.
         ),
         body: GroupListScreen(),
@@ -15,7 +15,7 @@ class GroupChatScreen extends StatelessWidget {
             // Add code to create a new group.
           },
           backgroundColor: Colors.purple, // Set the button's background color to purple.
-          child: Icon(Icons.group_add_outlined),
+          child: const Icon(Icons.group_add_outlined),
         ),
       ),
     );
@@ -41,7 +41,7 @@ class GroupListScreen extends StatelessWidget {
                 // Navigate to the group chat screen for the selected group.
               },
             ),
-            Divider(thickness: 1.5),
+          const  Divider(thickness: 1.5),
           ],
         );
       },

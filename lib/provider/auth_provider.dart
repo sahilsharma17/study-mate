@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_buddy/screens/registration_screen.dart';
 import 'package:study_buddy/services/database_service.dart';
 import 'package:study_buddy/utilities/snack_bar.dart';

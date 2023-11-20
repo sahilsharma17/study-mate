@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:study_buddy/helpers/helper_functions.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
 import 'package:study_buddy/screens/home.dart';
-import 'package:study_buddy/screens/profile_screen/profile_screen.dart';
 import 'package:study_buddy/screens/register_profile.dart';
 import 'package:study_buddy/utilities/snack_bar.dart';
 import 'package:study_buddy/widgets/custum_button.dart';

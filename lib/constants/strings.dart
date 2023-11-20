@@ -50,3 +50,9 @@ const video = "Video",
 const wishlist = "My Wishlist",
       orders = "My Orders",
       messages = "Messages";
+
+      //splash screen text
+const String tAppName="Study Mate";
+const String tAppTagLine="Make Your \n Learning Easy";
+
+

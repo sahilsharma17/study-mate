@@ -75,6 +75,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 const SizedBox(
                   height: 20,
                 ),
+
+
                 TextFormField(
                   controller: phoneController,
                   maxLength: 10,
@@ -126,6 +128,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold),
                 ),
+
+
                 const SizedBox(
                   height: 20,
                 ),
@@ -133,7 +137,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ? const CircularProgressIndicator(
                         color: Colors.purple,
                       )
-                    : SizedBox(
+                    :SizedBox(
                         width: double.infinity,
                         height: 50,
                         child: CustomButton(
