@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:study_buddy/constants/image_striing.dart';
+import 'package:study_buddy/constants/image_string.dart';
 import 'package:study_buddy/constants/sizes.dart';
 import 'package:study_buddy/constants/colors.dart';
 import 'package:study_buddy/constants/strings.dart';
@@ -12,6 +12,7 @@ import 'package:study_buddy/fade_in_animation/fade_in_animatioon_model.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
 import 'package:study_buddy/screens/home.dart';
 import 'package:study_buddy/screens/welcome_screen.dart';
+import 'package:study_buddy/services/authenticate.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -107,7 +108,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (isLoggedIn == true) {
       Get.offAll(() => const Home());
     } else {
-      Get.offAll(() => const WelcomeScreen());
+      Get.offAll(() => Authenticate());
     }
   }
 }
