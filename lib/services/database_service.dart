@@ -11,12 +11,17 @@ class DatabaseService {
   final CollectionReference groupCollection =
       FirebaseFirestore.instance.collection("groups");
 
-  //Updating the user data
-  Future addUserData({required String fullName, required String email}) async {
-     await userCollection
-        .doc(userId)
-        .set({"fullName": fullName, "email": email, "groups": []});
-    
+  //updating user data ankit
+  Future addUserData(
+      {required String fullName,
+      required String email,
+      required String phone}) async {
+    await userCollection.doc(userId).set({
+      "fullName": fullName,
+      "email": email,
+      "phone": phone,
+      "groups": [],
+    });
   }
 
   Future updateUserData({String? fullName, String? email}) async {}

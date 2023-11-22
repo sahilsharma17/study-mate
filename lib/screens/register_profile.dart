@@ -133,10 +133,10 @@ class UserDetailsPage extends StatelessWidget {
                   String fullName = nameController.text;
                   String email = emailController.text;
                   devTools.log("Called");
-                  await db.addUserData(
-                    fullName: fullName,
-                    email: email,
-                  );
+                  // await db.addUserData(
+                  //   fullName: fullName,
+                  //   email: email,
+                  // );
                   devTools.log("done");
                 },
                 // child: const Text('Save Details'),

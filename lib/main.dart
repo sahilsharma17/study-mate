@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
 import 'package:study_buddy/screens/home_screen.dart';
 import 'package:study_buddy/screens/otp_screen.dart';
+import 'package:study_buddy/screens/profile_settings.dart';
 import 'package:study_buddy/screens/registration_screen.dart';
 import 'package:study_buddy/screens/splash_screen/splash_screen.dart';
 import 'dart:developer' as devTools;
@@ -57,7 +58,7 @@ class _MyAppState extends State<MyApp> {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         // home: UserDetailsPage(),
-        //  home: RegistrationScreen(),
+        //  home: ProfileSettingScreen(),
           home:  const SplashScreen(),
         title: "Study Buddy",
         routes: {

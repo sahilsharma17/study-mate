@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:study_buddy/helpers/helper_functions.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
 import 'package:study_buddy/screens/home.dart';
+import 'package:study_buddy/screens/profile_settings.dart';
 import 'package:study_buddy/screens/register_profile.dart';
 import 'package:study_buddy/utilities/snack_bar.dart';
 import 'package:study_buddy/widgets/custum_button.dart';
@@ -170,7 +171,8 @@ class _OtpScreenState extends State<OtpScreen> {
             devTools.log(uid ?? "Not saved");
             dataExists
                 ? Get.offAll(() => const Home())
-                : Get.offAll(() => UserDetailsPage());
+                // : Get.offAll(() => UserDetailsPage());
+                     : Get.offAll(() => ProfileSettingScreen());
           });
     } on FirebaseAuthException catch (e) {
       snackBar(context, e.message.toString(), 'red');
