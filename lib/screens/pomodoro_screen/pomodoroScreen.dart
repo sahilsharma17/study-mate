@@ -28,7 +28,7 @@ class _PomodoroScreenState extends State<PomodoroScreen> {
           // style: textStyle(25.0, Colors.black, FontWeight.w700),
 
           style: textStyle(
-              Size: 25.0, color: Colors.white, fontWeight: FontWeight.w700),
+              Size: 25.0, color: Colors.white,),
         ),
         // actions: [
         //   IconButton(
