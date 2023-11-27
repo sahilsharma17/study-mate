@@ -12,7 +12,7 @@ class UserDetailsPage extends StatelessWidget {
     TextEditingController emailController = TextEditingController();
     TextEditingController nameController = TextEditingController();
     MyAuthProvider ap = Provider.of<MyAuthProvider>(context, listen: false);
-    DatabaseService db = DatabaseService(ap.getUserId);
+    
 
     return Scaffold(
       appBar: AppBar(

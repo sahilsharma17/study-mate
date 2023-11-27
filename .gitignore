@@ -3,3 +3,6 @@ build/
 .flutter-plugins
 .flutter-plugins-dependencies
 .idea/
+pubspec.lock
+macos/Flutter/GeneratedPluginRegistrant.swift
+windows/flutter/generated_plugin_registrant.cc

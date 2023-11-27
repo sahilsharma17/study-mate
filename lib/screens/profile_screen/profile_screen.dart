@@ -1,10 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:study_buddy/helpers/helper_functions.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
+import 'dart:developer' as devTools;
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  SharedPreferences? sp;
+  String userName = "";
+  String email = "";
+  void initializeUserData() async {
+    this.userName = await HelperFunctions.getUserNameFromSF() ?? "";
+    this.email = await HelperFunctions.getUserEmailFromSF() ?? "";
+    sp = await SharedPreferences.getInstance();
+     setState(() {});
+    devTools.log(userName);
+  }
+
+  void initState() {
+    initializeUserData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +45,11 @@ class ProfileScreen extends StatelessWidget {
               backgroundImage: AssetImage('assets/image1.png'),
             ),
             const SizedBox(height: 20),
-            itemProfile('Name', 'Ahad Hashmi', CupertinoIcons.person),
+            itemProfile('Name', userName, CupertinoIcons.person),
             const SizedBox(height: 10),
-            itemProfile('Phone', '03107085816', CupertinoIcons.phone),
+            itemProfile('Phone', '9728638388', CupertinoIcons.phone),
             const SizedBox(height: 10),
-            itemProfile(
-                'Address', 'abc address, xyz city', CupertinoIcons.location),
-            const SizedBox(height: 10),
-            itemProfile(
-                'Email', 'ahadhashmideveloper@gmail.com', CupertinoIcons.mail),
+            itemProfile('Email', email, CupertinoIcons.mail),
             // const SizedBox(height: 20),
             // ElevatedButton(
             //   onPressed: () {

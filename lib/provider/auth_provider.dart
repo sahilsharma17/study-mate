@@ -87,7 +87,7 @@ class MyAuthProvider extends ChangeNotifier {
   }
 
   Future<bool> checkUserDataexists() async {
-    DatabaseService databaseService = DatabaseService(_uid);
+    DatabaseService databaseService = DatabaseService(uid:_uid);
     return await databaseService.checkUserDataExists();
   }
 }

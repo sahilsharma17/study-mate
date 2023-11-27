@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
 import 'package:study_buddy/screens/home.dart';
 import 'package:study_buddy/screens/welcome_screen.dart';
+import 'package:study_buddy/services/database_service.dart';
+import 'dart:developer' as devTools;
 
 class SplashScreenOld extends StatefulWidget {
   @override
@@ -30,12 +32,13 @@ class _SplashScreenOldState extends State<SplashScreenOld> {
     MyAuthProvider ap = Provider.of<MyAuthProvider>(context, listen: false);
     bool isLoggedIn = ap.isSignedIn;
 
-
-    // FirebaseAuth auth = FirebaseAuth.instance;
-
     await Future.delayed(const Duration(seconds: 2));
 
-    if (isLoggedIn==true) {
+    if (isLoggedIn == true && ap.getUserId != null) {
+      String? uid = ap.getUserId;
+      DatabaseService db = DatabaseService(uid: uid);
+      bool b = await db.checkUserDataExists();
+      devTools.log(b.toString());
       Get.offAll(() => const Home());
     } else {
       Get.offAll(() => const WelcomeScreen());

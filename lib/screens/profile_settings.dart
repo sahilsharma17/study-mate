@@ -23,7 +23,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
     TextEditingController phoneController = TextEditingController();
 
     MyAuthProvider ap = Provider.of<MyAuthProvider>(context, listen: false);
-    DatabaseService db = DatabaseService(ap.getUserId);
+    
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -77,17 +77,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  //   greenButton('Submit' ,  onPressed: () async {
-                  //   String fullName = nameController.text;
-                  //   String email = emailController.text;
-                  //   String phone = phoneController.text;
-                  //   devTools.log("Called");
-                  //   await db.addUserData(
-                  //     fullName: fullName,
-                  //     email: email,
-                  //   );
-                  //   devTools.log("done");
-                  // },),
+                  
                   greenButton(title:
                     'Submit',onPressed: 
                     ()  {
