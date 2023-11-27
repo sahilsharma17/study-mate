@@ -6,8 +6,8 @@ ThemeData buildDarkTheme() {
   return ThemeData.dark().copyWith(
     useMaterial3: false,
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple),
-    primaryColorDark: primaryColor,
-    primaryColor: primaryColor,
+    primaryColorDark: Colors.purple,
+    primaryColor: Colors.purple,
     primaryIconTheme: const IconThemeData(grade: -25, weight: 100),
     textTheme: ThemeData.dark().textTheme.copyWith(
           displayLarge: const TextStyle(
@@ -48,8 +48,8 @@ ThemeData buildLightTheme() {
   return ThemeData.light().copyWith(
     useMaterial3: false,
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple),
-    primaryColorLight: primaryColor,
-    primaryColor: primaryColor,
+    primaryColorLight: Colors.purple,
+    primaryColor: Colors.purple,
     primaryIconTheme: const IconThemeData(grade: -25, weight: 100),
     scaffoldBackgroundColor: secondaryColor,
     textTheme: ThemeData.light().textTheme.copyWith(

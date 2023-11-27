@@ -50,19 +50,19 @@ class _PomodoroScreenState extends State<PomodoroScreen> {
            const SizedBox(height: 20),
             const TimerCard(),
           const  SizedBox(
-              height: 40,
+              height: 25,
             ),
             TimerOptions(),
           const  SizedBox(
-              height: 30,
+              height: 0,
             ),
             // TimeController(),
           const  SizedBox(
-              height: 30,
+              height: 10,
             ),
           const  ProgressWidget(),
           const  SizedBox(
-              height: 30,
+              height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -91,7 +91,21 @@ class _PomodoroScreenState extends State<PomodoroScreen> {
                       Provider.of<TimerService>(context, listen: false).reset(),
                 )
               ],
-            )
+            ),
+            Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      alignment: Alignment.bottomCenter,
+                      height: 200, // Set the height as needed
+                      child: Image.asset(
+                        'assets/kids.jpg', // Replace with your GIF URL
+                        height: 200, // Adjust height as needed
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
           ],
         ),
       )),
