@@ -1,106 +1,154 @@
-import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
-import 'package:study_buddy/screens/pomodoro_screen/utils.dart';
-import 'package:study_buddy/screens/session_screen/ui/add_task_bar.dart';
-import 'package:study_buddy/screens/session_screen/ui/theme.dart';
-import 'package:study_buddy/screens/session_screen/ui/widgets/button.dart';
+import 'package:provider/provider.dart';
+import 'package:study_buddy/constants/colors.dart';
+import 'package:study_buddy/controllers/todo_provider.dart';
+import 'package:study_buddy/screens/session_screen/add_update_task/add_update_task_screen.dart';
+import 'package:study_buddy/screens/session_screen/utils/session_utils.dart';
+import 'package:study_buddy/screens/session_screen/widget/all_task_header.dart';
+import 'package:study_buddy/screens/session_screen/widget/confetti_stars.dart';
+import 'package:study_buddy/screens/session_screen/widget/date_timeline.dart';
+import 'package:study_buddy/screens/session_screen/widget/datewise_task_header.dart';
+import 'package:study_buddy/screens/session_screen/widget/task_tile.dart';
 
-class MySessionPage extends StatefulWidget {
-  const MySessionPage({super.key});
+import 'widget/empty_widget.dart';
 
-  @override
-  State<MySessionPage> createState() => _MySessionPageState();
-}
+final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-class _MySessionPageState extends State<MySessionPage> {
-  DateTime _selectedDate = DateTime.now();  
+class MySessionScreen extends StatelessWidget {
+  const MySessionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 10,
-        backgroundColor: Colors.purple.shade500,
-        title: Text("Session", 
-        style: textStyle(
-              Size: 25.0, color: Colors.white, fontWeight: FontWeight.w400),),
-      ),
-      body: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  // margin: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(DateFormat.yMMMMd().format(DateTime.now()),
-                      style: subHeadingStyle,
-                      ),
-                       Text("Today",
-                       style: headingStyle,
-                       )
-                    ],
-                  ),
+    return SafeArea(
+      child: Consumer<TodoProvider>(builder: (context, todoProvider, child) {
+        // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        //   todoProvider.setStartAnimation(true);
+        // });
+        return DefaultTabController(
+          length: 2,
+          child: WillPopScope(
+            onWillPop: onWillPop,
+            child: Scaffold(
+              key: scaffoldKey,
+              body: todoProvider.isLoading == true
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Column(
+                      children: [
+                        const ConfettiStars(),
+                        TabBar(
+                            indicatorColor: Theme.of(context).primaryColor,
+                            unselectedLabelColor: Colors.black,
+                            splashBorderRadius: BorderRadius.circular(10),
+                            labelColor: Colors.white,
+                            indicatorPadding: const EdgeInsets.only(right: 10),
+                            indicatorSize: TabBarIndicatorSize.tab,
+                            indicator: BoxDecoration(
+                              color: Colors.purple,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: const EdgeInsets.all(10),
+                            tabs: const [
+                              Tab(
+                                text: "DateWise",
+                              ),
+                              Tab(
+                                text: "All",
+                              )
+                            ]),
+                        Expanded(
+                          child: TabBarView(
+                            children: [
+                              Column(
+                                children: [
+                                  DateWiseTaskHeader(
+                                      todoProvider: todoProvider),
+                                  DateTimeline(todoProvider: todoProvider),
+                                  todoProvider
+                                          .filterTodosByDate(
+                                              todoProvider.selectedDate)
+                                          .isEmpty
+                                      ? const EmptyWidget()
+                                      : Expanded(
+                                          child: ListView.builder(
+                                            shrinkWrap: true,
+                                            itemCount: todoProvider
+                                                .filterTodosByDate(
+                                                    todoProvider.selectedDate)
+                                                .length,
+                                            itemBuilder: (context, index) {
+                                              WidgetsBinding.instance
+                                                  .addPostFrameCallback((_) {
+                                                todoProvider
+                                                    .setIsListAll(false);
+                                              });
+                                              var todo = todoProvider
+                                                  .filterTodosByDate(
+                                                      todoProvider
+                                                          .selectedDate)[index];
+                                              return TaskTile(
+                                                  todoProvider: todoProvider,
+                                                  todo: todo);
+                                            },
+                                          ),
+                                        ),
+                                ],
+                              ),
+                              todoProvider.todos == null
+                                  ? const Center(
+                                      child: CircularProgressIndicator(),
+                                    )
+                                  : todoProvider.todos!.isEmpty
+                                      ? const EmptyWidget()
+                                      : Column(
+                                          children: [
+                                            AllTaskHeader(
+                                                todoProvider: todoProvider),
+                                            Expanded(
+                                              child: ListView.builder(
+                                                  shrinkWrap: true,
+                                                  itemCount: todoProvider
+                                                      .todos!.length,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    todoProvider
+                                                        .setIsListAll(true);
+                                                    var todo = todoProvider
+                                                        .todos![index];
+                                                    return TaskTile(
+                                                      todoProvider:
+                                                          todoProvider,
+                                                      todo: todo,
+                                                    );
+                                                  }),
+                                            ),
+                                          ],
+                                        )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+              floatingActionButton: FloatingActionButton(
+                backgroundColor: Colors.purple,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AddUpdateTaskScreen(),
+                    ),
+                  );
+                },
+                child: const Icon(
+                  Icons.add,
+                  color: secondaryColor,
                 ),
-                      MyButton(
-        label: "+ Add Task",
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AddTaskBar()),
-          );
-        },
-      ),
-
-              ],
+              ),
             ),
           ),
-
-
-          Container(
-            margin: const EdgeInsets.only(top: 20, left: 20),
-            child: DatePicker(
-              DateTime.now(),
-              height: 120,
-              width: 80,
-              initialSelectedDate: DateTime.now(),
-              selectionColor: Colors.purple.shade400,
-              selectedTextColor: Colors.white,
-              dateTextStyle: GoogleFonts.lato(
-                textStyle: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey
-                )
-              ),
-              dayTextStyle: GoogleFonts.lato(
-                textStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey
-                )
-              ),
-              monthTextStyle: GoogleFonts.lato(
-                textStyle: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey
-                )
-              ),
-              onDateChange: (date){
-                _selectedDate = date;
-              },
-            ),
-          ),
-        ],
-      ),
+        );
+      }),
     );
   }
 }
