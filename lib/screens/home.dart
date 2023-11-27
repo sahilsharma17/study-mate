@@ -6,7 +6,6 @@ import 'package:study_buddy/screens/session_screen/session.dart';
 
 import '../controllers/home_controller.dart';
 import 'groups_screen/group_chat_screen.dart';
-import 'home_screen.dart';
 import 'profile_screen/profile_screen.dart';
 
 class Home extends StatelessWidget {
@@ -20,18 +19,17 @@ class Home extends StatelessWidget {
     var navbarItems = [
       const BottomNavigationBarItem(icon: Icon(Icons.home),label: "home",),
       const BottomNavigationBarItem(icon: Icon(Icons.timer) , label: "Pomodoro"),
-      const BottomNavigationBarItem(icon: Icon(Icons.book) , label: "Session"),
       const BottomNavigationBarItem(icon: Icon(Icons.group), label: "Groups"),
       const BottomNavigationBarItem(icon: Icon(Icons.notes) , label: "Notes"),
+      const BottomNavigationBarItem(icon: Icon(Icons.person) , label: "Profile"),
     ];
 
     var navBody = [
-      const ProfileScreen(),
+      const MySessionScreen(),
       const PomodoroScreen(),
-      // const ProfileScreen(),
-      MySessionPage(),
       GroupChatScreen(),
       NotesScreen(),
+      const ProfileScreen(),
     ];
 
     return Scaffold(

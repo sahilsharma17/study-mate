@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
+import 'package:study_buddy/controllers/theme_provider.dart';
+import 'package:study_buddy/controllers/todo_provider.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
 import 'package:study_buddy/screens/home_screen.dart';
 import 'package:study_buddy/screens/otp_screen.dart';
@@ -30,9 +32,19 @@ Future<void> main() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
   }
-  runApp(ChangeNotifierProvider<TimerService>(
-    create: (_) => TimerService(),
-    child: const MyApp(),
+  runApp(
+  //   ChangeNotifierProvider<TimerService>(
+  //   create: (_) => TimerService(),
+  //   child: const MyApp(),
+  // )
+  MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => TodoProvider()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => TimerService(),),
+        ChangeNotifierProvider(create: (_) => MyAuthProvider()),
+      ],
+      child: const MyApp(),
   ));
 }
 
@@ -51,22 +63,17 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => MyAuthProvider()),
-      ],
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        // home: UserDetailsPage(),
-        //  home: ProfileSettingScreen(),
-          home:  const SplashScreen(),
-        title: "Study Buddy",
-        routes: {
-          "home_screen": (context) => const HomeScreen(),
-          "registration_screen": (context) => const RegistrationScreen(),
-          "otp_screen": (context) => const OtpScreen(),
-        },
-      ),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      // home: UserDetailsPage(),
+      //  home: ProfileSettingScreen(),
+        home:  const SplashScreen(),
+      title: "Study Buddy",
+      routes: {
+        "home_screen": (context) => const HomeScreen(),
+        "registration_screen": (context) => const RegistrationScreen(),
+        "otp_screen": (context) => const OtpScreen(),
+      },
     );
   }
 }
