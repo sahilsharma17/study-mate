@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:study_buddy/constants/app_colors.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
+import 'package:study_buddy/provider/database_provider.dart';
+import 'package:study_buddy/screens/home.dart';
 import 'package:study_buddy/services/database_service.dart';
 import 'package:study_buddy/widgets/green_intro_widget.dart';
 import 'dart:developer' as devTools;
@@ -16,14 +18,21 @@ class ProfileSettingScreen extends StatefulWidget {
 }
 
 class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
+  late TextEditingController nameController;
+  late TextEditingController emailController;
+  late TextEditingController phoneController;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController();
+    emailController = TextEditingController();
+    phoneController = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController nameController = TextEditingController();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController phoneController = TextEditingController();
-
-    MyAuthProvider ap = Provider.of<MyAuthProvider>(context, listen: false);
-    
+    DatabaseProvider db = Provider.of<DatabaseProvider>(context, listen: true);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -77,24 +86,29 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  
-                  greenButton(title:
-                    'Submit',onPressed: 
-                    ()  {
-                      // String fullName = nameController.text;
-                      // String email = emailController.text;
-                      // String phone = phoneController.text;
-                      devTools.log(nameController.text);
-                      devTools.log(emailController.text);
-                      devTools.log(phoneController.text);
-                      // await db.addUserData(
-                      //   fullName: fullName,
-                      //   email: email,
-                      //   phone: phone,
-                      // );
-                      devTools.log("done");
-                    },
-                  ),
+                  db.isLoading
+                      ? CircularProgressIndicator(
+                          color: Colors.purple.shade500,
+                        )
+                      : greenButton(
+                          title: 'Submit',
+                          onPressed: () async {
+                            String fullName = nameController.text;
+                            String email = emailController.text;
+                            String phone = phoneController.text;
+                            devTools.log(nameController.text);
+                            devTools.log(emailController.text);
+                            devTools.log(phoneController.text);
+                            await db.addUserData(
+                              fullName: fullName,
+                              email: email,
+                              phone: phone,
+                            );
+                            await db.checkUserDataExists();
+                            Get.offAll(() => const Home());
+                            devTools.log("done");
+                          },
+                        ),
                 ],
               ),
             )
@@ -132,6 +146,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
               ],
               borderRadius: BorderRadius.circular(8)),
           child: TextFormField(
+            controller: controller,
             decoration: InputDecoration(
               prefixIcon: Padding(
                 padding: const EdgeInsets.only(left: 10),
@@ -154,7 +169,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
       height: 50,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       color: Colors.purple,
-      onPressed: () => onPressed,
+      onPressed: () => onPressed(),
       child: Text(
         title,
         style: GoogleFonts.poppins(

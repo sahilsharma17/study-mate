@@ -61,6 +61,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        
         actions: [
           IconButton(
               onPressed: () {

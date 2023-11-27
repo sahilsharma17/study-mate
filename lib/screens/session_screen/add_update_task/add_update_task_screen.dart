@@ -7,7 +7,6 @@ import 'package:study_buddy/screens/session_screen/add_update_task/widget/custom
 import 'package:study_buddy/screens/session_screen/model/todo_model.dart';
 import 'package:study_buddy/screens/session_screen/utils/session_utils.dart';
 
-
 class AddUpdateTaskScreen extends StatelessWidget {
   final TodoModel? updateTodo;
   const AddUpdateTaskScreen({super.key, this.updateTodo});
@@ -173,7 +172,7 @@ class AddUpdateTaskScreen extends StatelessWidget {
                           }
 
                           if (dateController.text.isEmpty) {
-                            dateController.text = dateFormat(DateTime.now());
+                            dateController.text = dormatDate(DateTime.now());
                           }
 
                           if (timeController.text.isEmpty) {

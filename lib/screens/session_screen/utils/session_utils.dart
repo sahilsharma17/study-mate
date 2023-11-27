@@ -4,7 +4,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:study_buddy/constants/colors.dart';
 
-
 showAlertDialog({
   required BuildContext context,
   required String title,
@@ -80,8 +79,7 @@ Future<bool> onWillPop() async {
   return Future.value(true);
 }
 
-
-dateFormat(DateTime date) {
+dormatDate(DateTime date) {
   String formattedDate = DateFormat('dd/MM/yyyy').format(date);
   return formattedDate;
 }
@@ -93,12 +91,11 @@ Future<String> pickDate(BuildContext context) async {
       firstDate: DateTime(2015, 8),
       lastDate: DateTime(2101));
   if (picked != null) {
-    return dateFormat(picked);
+    return dormatDate(picked);
   } else {
     return '';
   }
 }
-
 
 Future<String> timePicker(BuildContext context) async {
   TimeOfDay? pickedTime =

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:study_buddy/controllers/theme_provider.dart';
 import 'package:study_buddy/controllers/todo_provider.dart';
 import 'package:study_buddy/provider/auth_provider.dart';
+import 'package:study_buddy/provider/database_provider.dart';
 import 'package:study_buddy/screens/home_screen.dart';
 import 'package:study_buddy/screens/otp_screen.dart';
 import 'package:study_buddy/screens/profile_settings.dart';
@@ -43,6 +44,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => TimerService(),),
         ChangeNotifierProvider(create: (_) => MyAuthProvider()),
+        ChangeNotifierProvider(create: (_)=> DatabaseProvider())
       ],
       child: const MyApp(),
   ));
@@ -65,8 +67,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      // home: UserDetailsPage(),
-      //  home: ProfileSettingScreen(),
         home:  const SplashScreen(),
       title: "Study Buddy",
       routes: {

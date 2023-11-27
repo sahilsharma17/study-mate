@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:developer' as devTools;
-
 import 'package:study_buddy/helpers/helper_functions.dart';
 
 class DatabaseService {
@@ -139,8 +138,6 @@ class DatabaseService {
 
   Future<bool> checkUserDataExists() async {
     var doc = await userCollection.doc(uid).get();
-    devTools.log(doc.exists.toString());
-    devTools.log(doc['email']);
     if (doc.exists) {
       await HelperFunctions.saveUserEmailSF(doc['email']);
       await HelperFunctions.saveUserNameSF(doc['fullName']);

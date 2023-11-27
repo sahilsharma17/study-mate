@@ -30,16 +30,18 @@ class DatabaseProvider extends ChangeNotifier {
       FirebaseFirestore.instance.collection("users");
   static final CollectionReference groupCollection =
       FirebaseFirestore.instance.collection("groups");
-  static final CollectionReference notesCollection =
+  static CollectionReference notesCollection =
       userCollection.doc(userId).collection("Notes");
 
   //Updating the user data
-  Future addUserData({required String fullName, required String email}) async {
+  Future addUserData(
+      {required String fullName,
+      required String email,
+      required String phone}) async {
     _isLoading = true;
     notifyListeners();
-    await userCollection
-        .doc(userId)
-        .set({"fullName": fullName, "email": email, "groups": []});
+    await userCollection.doc(userId).set(
+        {"fullName": fullName, "email": email, "phone": phone, "groups": []});
     _isLoading = false;
     notifyListeners();
   }
@@ -50,6 +52,7 @@ class DatabaseProvider extends ChangeNotifier {
   Future<bool> checkUserDataExists() async {
     initializeUserId();
     DocumentSnapshot doc = await userCollection.doc(userId).get();
+    notesCollection = userCollection.doc(userId).collection("Notes");
     devTools.log(doc.exists.toString());
 
     return doc.exists;
@@ -69,5 +72,31 @@ class DatabaseProvider extends ChangeNotifier {
   //get user groups
   getUserGroups() async {
     return userCollection.doc(userId).snapshots();
+  }
+
+  //get notes stream
+  Stream<QuerySnapshot> getPinnedNotesStream() {
+    return notesCollection.where("is_pinned", isEqualTo: true).snapshots();
+  }
+
+  Stream<QuerySnapshot> getUnpinnedNotesStream() {
+    return notesCollection.where("is_pinned", isEqualTo: false).snapshots();
+  }
+
+  Future<void> addNote({
+    required String title,
+    required String content,
+    required bool isPinned,
+  }) async {
+    final date = DateTime.now().toString();
+    await notesCollection.add({
+      "note_title": title,
+      "creation_date": date,
+      "note_content": content,
+      "is_pinned": isPinned,
+    });
+  }
+  Future<void> deleteNote({required String id})async{
+    await notesCollection.doc(id).delete();
   }
 }
