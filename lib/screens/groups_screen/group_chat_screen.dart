@@ -59,7 +59,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: Colors.purple.shade50,
       appBar: AppBar(
         
         actions: [
@@ -73,7 +73,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
         ],
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.purple,
         title: const Text(
           "Groups",
           style: TextStyle(
@@ -86,7 +86,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
           popUpDialog(context);
         },
         elevation: 0,
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.purple,
         child: const Icon(
           Icons.add,
           color: Colors.white,

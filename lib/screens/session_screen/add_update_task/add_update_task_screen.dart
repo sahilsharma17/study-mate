@@ -172,7 +172,7 @@ class AddUpdateTaskScreen extends StatelessWidget {
                           }
 
                           if (dateController.text.isEmpty) {
-                            dateController.text = dormatDate(DateTime.now());
+                            dateController.text = formatDate(DateTime.now());
                           }
 
                           if (timeController.text.isEmpty) {

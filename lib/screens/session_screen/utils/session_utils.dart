@@ -79,7 +79,7 @@ Future<bool> onWillPop() async {
   return Future.value(true);
 }
 
-dormatDate(DateTime date) {
+formatDate(DateTime date) {
   String formattedDate = DateFormat('dd/MM/yyyy').format(date);
   return formattedDate;
 }
@@ -91,7 +91,7 @@ Future<String> pickDate(BuildContext context) async {
       firstDate: DateTime(2015, 8),
       lastDate: DateTime(2101));
   if (picked != null) {
-    return dormatDate(picked);
+    return formatDate(picked);
   } else {
     return '';
   }

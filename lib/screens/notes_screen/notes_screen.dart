@@ -34,12 +34,12 @@ class _NotesScreenState extends State<NotesScreen> {
     Stream<QuerySnapshot> pinnedNotesStream = dbProvider.getPinnedNotesStream();
 
     return Scaffold(
-        backgroundColor: bgColor,
+        backgroundColor: Colors.purple.shade50,
         appBar: AppBar(
           elevation: 0.0,
           title: const Text("Notes"),
           centerTitle: true,
-          backgroundColor: const Color.fromRGBO(100, 144, 128, 1),
+          backgroundColor: Colors.purple,
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -140,9 +140,9 @@ class _NotesScreenState extends State<NotesScreen> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton(backgroundColor: Colors.purple,
           onPressed: () {
-            Get.to(NoteEditorScreen());
+            Get.to(()=> const NoteEditorScreen());
           },
           child: const Icon(Icons.add),
         ));
