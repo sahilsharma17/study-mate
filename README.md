@@ -1,16 +1,32 @@
-# study_buddy
+# Study Mate
 
-A new Flutter project.
+Study Mate is a web application to help students organize study materials, note keeping collaborate with peers, and task progress.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- User authentication using Mobile OTP
+- Dashboard for tasks
+- Pomodoro implementation for study session management
+- Study groups for collaboration
+- Task management and progress tracking
+- Mobile responsive design
+- Notes keeping
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+https://github.com/sahilsharma17/Grosify/assets/83007507/8c8f24ac-a8e6-41cb-b644-db0c84f58af0
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+## Technologies Used
+
+- Flutter 
+- Database and backend: Cloud Firestore and Local storage
+- Authentication: Firebase
+
+## Contributing
+
+We welcome contributions! Fork the repository, make changes, and open a pull request.
+
+## License
+
+This project is licensed under the MIT License.
