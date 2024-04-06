@@ -1,6 +1,6 @@
 # Study Mate
 
-Study Mate is a web application to help students organize study materials, note keeping collaborate with peers, and task progress.
+Study Mate is a mobile application to help students organize study materials, note keeping collaborate with peers, and task progress.
 
 ## Features
 
